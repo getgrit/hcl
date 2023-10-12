@@ -2,9 +2,12 @@
 title: Edit module
 ---
 
-Find a key-value pair in Terraform HCL.
+Update a module by specifying its old `source` and the new one.
 
-```[grit](grit)
+It will update the `source` attribute of the modules and remove all variables that
+are not found on another module `path`.
+
+```grit
 engine marzano(0.1)
 language hcl
 
@@ -59,7 +62,7 @@ pattern collect_variables($var_names) {
 pattern edit_module($old_source, $new_source, $module_path) {
     $var_names = [],
     some bubble($var_names) file($name, $body) where {
-      $name <: r"\./ops/terraform/envs/prod/.*",
+      $name <: r"\./ops/terraform/envs/prod/.*", // Path to get variables from
       $body <: contains collect_variables($var_names),
     },
     some bubble($old_source, $new_source, $var_names) file($name, $body) where {
