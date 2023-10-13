@@ -1,13 +1,17 @@
 module "test_module1" {
-  source    = "new_source"
+  source = "new_source"
   variable1 = "variable1"
   variable2 = "variable2"
+  
+  
 }
 
 module "test_module2" {
-  source    = "new_source"
+  source = "new_source"
   variable1 = "variable1"
   variable2 = "variable2"
+  
+  
 }
 
 module "test_module3" {
