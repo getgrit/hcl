@@ -62,7 +62,7 @@ pattern collect_variables($var_names) {
 pattern edit_module($old_source, $new_source, $module_path) {
     $var_names = [],
     some bubble($var_names) file($name, $body) where {
-      $name <: r"\./ops/terraform/envs/prod/.*", // Path to get variables from
+      $name <: r"\./test_edit_module/variables/.*", // Path to get variables from
       $body <: contains collect_variables($var_names),
     },
     some bubble($old_source, $new_source, $var_names) file($name, $body) where {
@@ -70,5 +70,5 @@ pattern edit_module($old_source, $new_source, $module_path) {
     }
 }
 
-files(files = edit_module(old_source=`"../../modules/main"`, new_source=`"new_module"`, module_path=""))
+files(files = edit_module(old_source=`"old_source"`, new_source=`"new_source"`, module_path=""))
 ```
