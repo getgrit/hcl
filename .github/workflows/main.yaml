@@ -26,9 +26,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Run grit patterns test
-        run: grit patterns test
-
       - name: Install @getgrit/launcher
         run: npm install -g @getgrit/launcher
 
