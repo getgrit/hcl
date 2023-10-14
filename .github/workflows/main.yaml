@@ -21,11 +21,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: install grit
-        run: curl -fsSL https://docs.grit.io/install | bash
-
-      - name: Run doctor
-        run: grit doctor
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Run grit patterns test
         run: grit patterns test
+
+      - name: Install @getgrit/launcher
+        run: npm install -g @getgrit/launcher
+
+      - name: Run doctor
+        run: npx grit doctor
+
+      - name: Run grit patterns test
+        run: npx grit patterns test
